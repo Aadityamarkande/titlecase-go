@@ -4,7 +4,7 @@ mkdir -p /workspace/repo
 cd /workspace/repo
 
 cat > go.mod <<'GOMOD'
-module titlecase
+module tcgo
 
 go 1.23
 GOMOD
@@ -40,7 +40,6 @@ var (
 	allConsonants = regexp.MustCompile(`(?i)^[bcdfghjklmnpqrstvwxz]+$`)
 )
 
-// Python str.capitalize(): first char upper, the rest lower.
 func capitalize(s string) string {
 	if s == "" {
 		return s
@@ -53,7 +52,6 @@ func isSpace(r rune) bool {
 	return unicode.IsSpace(r) || (r >= 0x1c && r <= 0x1f)
 }
 
-// Python: regex.split(r'(\s)', line) -> words (even items), spaces (odd items)
 func splitWS(line string) ([]string, []string) {
 	words := []string{""}
 	var spaces []string
@@ -188,4 +186,5 @@ GOEOF
 
 find /workspace/repo -name '*.py' -delete
 find /workspace/repo -name '__pycache__' -type d -prune -exec rm -rf {} + 2>/dev/null || true
-go build ./...
+find /workspace/repo -mindepth 1 -type d -empty -delete
+go build -o /dev/null .
