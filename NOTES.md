@@ -74,7 +74,12 @@ a an and as at but by en for if in of on or the to v v. via vs vs.
 17. "v." and "vs." are small words.
     "roe v. wade" -> "Roe v. Wade"
 
-## Examples to double check (the agent / I may be wrong)
-List here every example whose real output differed from what is written above.
-These are the rare cases to test in Step 4:
--
+## Examples to double check (surprising real outputs from the original code)
+All 19 examples above matched the real output. These extra cases from the generated
+data are the rare ones that a port can easily get wrong:
+- "mr s/he a" -> "Mr S/He A" (each part of a slashed word is capitalised, even "he")
+- "nbc PhD st. O'NEIL" -> "NBC PhD St. O'NEIL" (mixed-case words are kept, "st." is not an acronym)
+- "LANGUAGE HELLO GARDEN D'ARC." -> "Language Hello Garden D'arc." (in an all-caps line the apostrophe rule does not apply)
+- "secret -- an o'clock" -> "Secret -- An O'Clock" (the letter after the apostrophe is capitalised)
+- "macdonald v review nbc" -> "Macdonald v Review NBC" ("macdonald" is not treated like "mcdonald")
+- "re-enter trailing- a/b" -> "Re-Enter Trailing- A/B" (a trailing hyphen is kept)
